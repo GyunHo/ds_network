@@ -22,9 +22,12 @@ class LoginScreen extends StatelessWidget {
             TextFormField(
               controller: controller.passwordController,
             ),
-            TextButton(onPressed: controller.signIn(),child: Text('aaaaa'),),
-            TextButton(onPressed: controller.signOut(), child: Text('out'))
-
+            OutlinedButton(
+                onPressed: () {
+                  controller.signIn(controller.emailController.text,
+                      controller.passwordController.text);
+                },
+                child: Text('로그인!')),
           ],
         ),
       ),

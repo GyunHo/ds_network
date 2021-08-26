@@ -1,14 +1,23 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthController extends GetxController {
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
   FirebaseAuth _auth = FirebaseAuth.instance;
 
-  Rx<User?> get streamAuthStatus => _auth.currentUser.obs;
+  createUser(String email, String password) {
+    _auth.createUserWithEmailAndPassword(email: email, password: password);
+  }
 
-  @override
-  void onInit() {
+  signIn(String email, String password) {
+    _auth.signInWithEmailAndPassword(email: email, password: password);
+  }
 
-    super.onInit();
+  signOut() {
+    _auth.signOut();
   }
 }
