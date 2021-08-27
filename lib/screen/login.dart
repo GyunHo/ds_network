@@ -9,27 +9,66 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final AuthController controller = Get.find();
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text('로그인 스크린'),
+        centerTitle: true,
+        title: Text('사원 인증'),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          children: [
-            TextFormField(
-              controller: controller.emailController,
+      body: Column(
+        children: [
+          Expanded(
+            flex: 2,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child: TextFormField(
+                      controller: controller.emailController,
+                    ),
+                  ),
+                  TextFormField(
+                    controller: controller.passwordController,
+                  ),
+                ],
+              ),
             ),
-            TextFormField(
-              controller: controller.passwordController,
+          ),
+          Expanded(
+            child: Column(
+              children: [
+                OutlinedButton(
+                    onPressed: () {
+                      controller.signIn(controller.emailController.text,
+                          controller.passwordController.text);
+                    },
+                    child: Text(
+                      '로그인',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.0,
+                      ),
+                    )),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text('or'),
+                ),
+                OutlinedButton(
+                    onPressed: () {},
+                    child: Text(
+                      '사원등록',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.0,
+                      ),
+                    ))
+              ],
             ),
-            OutlinedButton(
-                onPressed: () {
-                  controller.signIn(controller.emailController.text,
-                      controller.passwordController.text);
-                },
-                child: Text('로그인!')),
-          ],
-        ),
+            flex: 4,
+          )
+        ],
       ),
     );
   }

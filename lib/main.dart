@@ -23,12 +23,15 @@ class InitScreen extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot user) {
           if (user.hasData) {
             return GetMaterialApp(
+              theme: ThemeData.dark(),
               home: HomeScreen(),
             );
           }
           if (!user.hasData) {
-
-            return GetMaterialApp(home: LoginScreen());
+            return GetMaterialApp(
+              home: LoginScreen(),
+              theme: ThemeData.dark(),
+            );
           } else {
             return Scaffold(
               body: Center(
